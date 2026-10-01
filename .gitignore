@@ -1,0 +1,15 @@
+# Secrets : ne jamais commiter .env (seul .env.example est versionné)
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Éditeurs / OS
+.vscode/
+.idea/
+.DS_Store
