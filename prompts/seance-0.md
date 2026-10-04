@@ -1,3 +1,5 @@
+ Agent utilisé : Claude Code
+ 
 Je démarre le projet GearShare pour le module E5 (Fullstack data application) : une plateforme de prêt de matériel entre étudiants.
 
 Je suis seul sur le projet, le projet indique qu'il faut être deux, mais le prof a indiqué à l'oral qu'il est possible de le faire tout seul. Le cours et les énoncés sont disponibles en lecture seule sur [GitHub (Madwaks/fullstack-data-application-2026)](https://github.com/Madwaks/fullstack-data-application-2026). Tu vas donc copier ce repo dans un dossier externe et on va lire ce repo de l'extérieur pour construire le notre.

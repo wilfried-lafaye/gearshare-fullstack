@@ -4,6 +4,10 @@ Plateforme de prêt de matériel entre étudiants (module E5 — Fullstack data 
 
 > Projet réalisé en solo, avec l'accord oral de l'enseignant.
 
+## Agent IA utilisé
+
+Claude Code (Anthropic), et non GitHub Copilot : choix assumé, un second LLM étant autorisé. Les échanges sont dans `prompts/`, les contrôles dans `reviews/`.
+
 ## Démarrage
 
 ```bash
@@ -13,4 +17,4 @@ cp .env.example .env
 docker compose up
 ```
 
-(à compléter au fil des séances)
+
