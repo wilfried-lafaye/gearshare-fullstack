@@ -6,13 +6,16 @@ router = APIRouter(prefix="/reservations", tags=["reservations"])
 
 # Stockage en mémoire, propre à ce router
 RESERVATIONS_DB: dict[int, dict] = {}
-_next_id = 1
+
+
+def _next_id() -> int:
+    # L'id se déduit du dictionnaire : un seul état à remettre à zéro
+    return max(RESERVATIONS_DB, default=0) + 1
 
 
 @router.post("", response_model=ReservationRead, status_code=201)
 def create_reservation(payload: ReservationCreate):
     """Crée une réservation active ; 409 si la période chevauche une réservation active du même item."""
-    global _next_id
     for existante in RESERVATIONS_DB.values():
         # Périodes à fin exclusive : fin le 15 et début le 15 ne se chevauchent pas
         if (
@@ -25,9 +28,9 @@ def create_reservation(payload: ReservationCreate):
                 status_code=409,
                 detail=f"Item {payload.item_id} déjà réservé sur cette période",
             )
-    reservation = {"id": _next_id, "statut": "active", **payload.model_dump()}
-    RESERVATIONS_DB[_next_id] = reservation
-    _next_id += 1
+    reservation_id = _next_id()
+    reservation = {"id": reservation_id, "statut": "active", **payload.model_dump()}
+    RESERVATIONS_DB[reservation_id] = reservation
     return reservation
 
 

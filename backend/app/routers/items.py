@@ -6,7 +6,11 @@ router = APIRouter(prefix="/items", tags=["items"])
 
 # Stockage en mémoire : id -> item
 FAKE_DB: dict[int, dict] = {}
-_next_id = 1
+
+
+def _next_id() -> int:
+    # L'id se déduit du dictionnaire : un seul état à remettre à zéro
+    return max(FAKE_DB, default=0) + 1
 
 
 @router.get("", response_model=list[ItemRead])
@@ -33,10 +37,9 @@ def list_items(
 @router.post("", response_model=ItemRead, status_code=201)
 def create_item(payload: ItemCreate):
     """Crée un item et lui attribue le prochain id."""
-    global _next_id
-    item = {"id": _next_id, **payload.model_dump()}
-    FAKE_DB[_next_id] = item
-    _next_id += 1
+    item_id = _next_id()
+    item = {"id": item_id, **payload.model_dump()}
+    FAKE_DB[item_id] = item
     return item
 
 
